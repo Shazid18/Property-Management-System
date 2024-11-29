@@ -1,0 +1,140 @@
+Step 1: Create & active virtual environment:
+- python3 -m venv venv
+- source venv/bin/activate
+
+Step 2: Install Django
+- pip install django
+
+Step 3: Install psycopg2-binary
+- pip install psycopg2-binary
+
+Step 4: Store the dependencies
+- pip freeze > requirements.txt
+
+Step 5: Make a Django project
+- django-admin startproject Inventory_Management
+
+Step 6: Make an app
+- python manage.py startapp property_management
+
+Step 7: Install the app in 'settings.py' Installed App[]
+
+Step 8: edit app's views.py and create a urls.py file.
+
+Step 9: Add url for views.py file and edit Inventory_Management's urls.py to connect the app's urls.
+
+Step 10: Do migrate
+- python manage.py migrate
+
+Step 11: Run the server
+- python manage.py runserver
+
+
+###### Docker, PostGres and PostGis ########
+
+Step 1: Update settings.py for PostgreSQL
+
+```
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',  # PostGIS engine
+            'NAME': 'inventory_db',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': 'db',
+            'PORT': '5432',
+        }
+    }
+```
+Step 2: Add Required Dependencies
+- pip install psycopg2-binary
+
+Step 3: Set Up a docker-compose.yml File
+
+Step 4: Configure Django for PostGis
+- update your 'INSTALLED_APPS' in 'settings.py'
+```
+    INSTALLED_APPS = [
+        # Other apps
+        'django.contrib.gis',
+        'property_management',
+    ]
+```
+
+Step 5: Create a Dockerfile
+
+Step 6: Create a requirements.txt file and add Required dependency
+ ```
+    Django>=4.0,<5.0
+    psycopg2-binary
+    django[gis]
+```
+
+Step 7: Build the Image
+- docker build -t inventory_django .
+
+Step 8: Start the Containers:
+- docker-compose up --build
+
+Step 9: Apply Migrations
+- docker exec -it django_app python manage.py migrate
+
+Step 10: Access the Application
+- http://localhost:8000
+
+Step 11: Verify Database Connection
+- docker exec -it django_app python manage.py createsuperuser
+
+
+
+#### Check if postgis is installed or not and its works perfectly or not? ########
+
+Step 1: Connect to PostgreSQL
+- docker exec -it inventory_postgis psql -U postgres -d inventory_db
+
+Step 2: Check for PostGIS Extension
+- SELECT PostGIS_Full_Version();
+
+Step 3: Test PostGIS Functionality
+- Run some basic queries to confirm PostGIS is functioning:
+    1. Create a Table with a Geometry Column
+    ```
+    CREATE TABLE test_geom (
+        id SERIAL PRIMARY KEY,
+        geom GEOMETRY(Point, 4326)
+    );
+    ```
+    2. Insert a Point into the Table
+    ```
+    INSERT INTO test_geom (geom)
+    VALUES (ST_GeomFromText('POINT(90.4125 23.8103)', 4326));
+    ```
+    3. Query the Table
+    ```
+    SELECT id, ST_AsText(geom) AS geometry FROM test_geom;
+    ```
+Step 4: Check Spatial Reference Systems
+    ```
+    SELECT * FROM spatial_ref_sys LIMIT 5;
+    ```
+
+Step 5: Exit PostgreSQL
+    ```
+    \q
+    ```
+
+
+
+##### Docker Basic Things #####
+
+- docker compose up => for run the docker
+
+- docker ps => To see Containers details
+
+- docker compose down => for stop the docker
+
+- docker ps -a => To see if any image or hidden this running
+
+- docker stop <Containers ID> => To stop any specific Container
+
+- docker rm <Containers ID> => Remove any specific Container
