@@ -77,6 +77,7 @@ Step 8: Start the Containers:
 - docker-compose up --build
 
 Step 9: Apply Migrations
+- docker exec -it django_app python manage.py makemigrations
 - docker exec -it django_app python manage.py migrate
 
 Step 10: Access the Application
@@ -138,3 +139,19 @@ Step 5: Exit PostgreSQL
 - docker stop <Containers ID> => To stop any specific Container
 
 - docker rm <Containers ID> => Remove any specific Container
+
+
+
+#### Drop Database ####
+
+docker exec -it <postgres_container_name> bash (inventory_postgis)
+psql -U <your_db_user> (postgres)
+\c postgres
+DROP DATABASE <your_db_name>; (inventory_db)
+CREATE DATABASE <your_db_name>; (inventory_db)
+\q
+
+docker exec -it django_app python manage.py migrate
+docker exec -it django_app python manage.py createsuperuser
+
+
