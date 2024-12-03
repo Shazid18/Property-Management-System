@@ -155,3 +155,42 @@ docker exec -it django_app python manage.py migrate
 docker exec -it django_app python manage.py createsuperuser
 
 
+### Populate initial location data ###
+
+1st run the migrate
+- docker exec -it django_app python manage.py migrate
+
+Dry Run: Preview changes without committing them to the database
+- docker exec -it django_app python manage.py populate_location_data --dry-run
+
+Then run the custom management command to populate location data
+- docker exec -it django_app python manage.py populate_location_data
+
+
+
+### SiteMap Generate ###
+
+Open bash
+- docker exec -it django_app bash
+
+Run the command in the bash to generate the SiteMap
+- python manage.py generate_sitemap
+
+
+### Update the Property Owners Group ###
+
+- docker exec -it django_app python manage.py migrate
+
+- docker exec -it django_app python manage.py create_property_owners_group
+
+
+### Run Test ###
+
+- docker exec -it django_app coverage run --source='.' manage.py test
+
+or
+
+- docker exec -it django_app python manage.py test
+
+To see coverage report
+- docker exec -it django_app coverage report

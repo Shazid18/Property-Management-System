@@ -52,6 +52,18 @@ class Accommodation(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        # If the user field is not already set and the user is logged in
+        if not self.user and hasattr(self, 'user'):
+            if self.user is None:
+                # If the user is logged in and is not a superuser, assign them
+                from django.contrib.auth import get_user_model
+                current_user = get_user_model()
+                if current_user.is_authenticated and not current_user.is_superuser:
+                    self.user = current_user
+
+        super().save(*args, **kwargs)
 
 
 # models.py

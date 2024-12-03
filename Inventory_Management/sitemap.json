@@ -1,0 +1,45 @@
+[
+  {
+    "Bangladesh": "bd",
+    "states": [
+      {
+        "Dhaka": "bd/dhaka",
+        "cities": [
+          {
+            "Mirpur": "bd/dhaka/mirpur"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Canada": "ca",
+    "states": [
+      {
+        "Ontario": "ca/ontario",
+        "cities": [
+          {
+            "Toronto": "ca/ontario/toronto"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "United Kingdom": "gb",
+    "states": []
+  },
+  {
+    "United States": "us",
+    "states": [
+      {
+        "California": "us/california",
+        "cities": [
+          {
+            "San Francisco": "us/california/san-francisco"
+          }
+        ]
+      }
+    ]
+  }
+]
