@@ -194,3 +194,18 @@ or
 
 To see coverage report
 - docker exec -it django_app coverage report
+
+
+### CSV ###
+
+1st install import_export
+- pip install django-import-export
+
+Add import_export to INSTALLED_APPS in settings.py
+```
+INSTALLED_APPS = [
+    ...,
+    'import_export',
+    ...
+]
+```

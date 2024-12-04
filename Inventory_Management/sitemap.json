@@ -1,14 +1,50 @@
 [
   {
+    "Australia": "au",
+    "states": [
+      {
+        "New South Wales": "au/new-south-wales",
+        "cities": [
+          {
+            "Sydney": "au/new-south-wales/sydney"
+          }
+        ]
+      },
+      {
+        "Victoria": "au/victoria",
+        "cities": [
+          {
+            "Melbourne": "au/victoria/melbourne"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "Bangladesh": "bd",
     "states": [
+      {
+        "Chittagong": "bd/chittagong",
+        "cities": [
+          {
+            "Khulshi": "bd/chittagong/khulshi"
+          }
+        ]
+      },
       {
         "Dhaka": "bd/dhaka",
         "cities": [
           {
+            "Dhanmondi": "bd/dhaka/dhanmondi"
+          },
+          {
             "Mirpur": "bd/dhaka/mirpur"
           }
         ]
+      },
+      {
+        "Rajshahi": "bd/rajshahi",
+        "cities": []
       }
     ]
   },
@@ -22,12 +58,58 @@
             "Toronto": "ca/ontario/toronto"
           }
         ]
+      },
+      {
+        "Quebec": "ca/quebec",
+        "cities": [
+          {
+            "Montreal": "ca/quebec/montreal"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "India": "in",
+    "states": [
+      {
+        "Karnataka": "in/karnataka",
+        "cities": [
+          {
+            "Bengaluru": "in/karnataka/bengaluru"
+          }
+        ]
+      },
+      {
+        "Maharashtra": "in/maharashtra",
+        "cities": [
+          {
+            "Mumbai": "in/maharashtra/mumbai"
+          }
+        ]
       }
     ]
   },
   {
     "United Kingdom": "gb",
-    "states": []
+    "states": [
+      {
+        "England": "gb/england",
+        "cities": [
+          {
+            "London": "gb/england/london"
+          }
+        ]
+      },
+      {
+        "Scotland": "gb/scotland",
+        "cities": [
+          {
+            "Edinburgh": "gb/scotland/edinburgh"
+          }
+        ]
+      }
+    ]
   },
   {
     "United States": "us",
@@ -36,7 +118,15 @@
         "California": "us/california",
         "cities": [
           {
-            "San Francisco": "us/california/san-francisco"
+            "Los Angeles": "us/california/los-angeles"
+          }
+        ]
+      },
+      {
+        "New York": "us/new-york",
+        "cities": [
+          {
+            "New York City": "us/new-york/new-york-city"
           }
         ]
       }

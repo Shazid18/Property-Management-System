@@ -6,8 +6,6 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
-# Create your views here.
-
 
 def home(request):
     return HttpResponse("Hello, World!")
@@ -30,6 +28,7 @@ def property_owner_sign_up(request):
         form = PropertyOwnerSignUpForm()
 
     return render(request, 'property_owner_sign_up.html', {'form': form})
+
 
 def property_owner_sign_up_success(request):
     return render(request, 'property_owner_sign_up_success.html')

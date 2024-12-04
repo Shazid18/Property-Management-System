@@ -3,6 +3,8 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import UserAdmin
 from django.db.models import Q
 from .models import Location, Accommodation, AccommodationImage, LocalizeAccommodation
+from import_export.admin import ImportExportModelAdmin
+from .resources import LocationResource
 
 
 # Inline formset for handling multiple images
@@ -13,7 +15,8 @@ class AccommodationImageInline(admin.TabularInline):
 
 
 @admin.register(Location)
-class LocationAdmin(admin.ModelAdmin):
+class LocationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = LocationResource
     list_display = ('id', 'title', 'location_type',
                     'country_code', 'state_abbr', 'city')
     search_fields = ('title', 'country_code', 'state_abbr', 'city')
@@ -33,14 +36,28 @@ class LocationAdmin(admin.ModelAdmin):
     def has_view_permission(self, request, obj=None):
         # Allow viewing for superusers and members of the Property Owners group
         return (
-            request.user.is_superuser or 
+            request.user.is_superuser or
             request.user.groups.filter(name="Property Owners").exists()
         )
+    
+    # def get_actions(self, request):
+    #     """
+    #     Override this method to remove the import/export actions for non-superusers.
+    #     """
+    #     actions = super().get_actions(request)
+
+    #     # Check if the user is a superuser
+    #     if not request.user.is_superuser:
+    #         # Remove import/export actions for non-superusers
+    #         actions.pop('import_export', None)
+
+    #     return actions
 
 
 @admin.register(Accommodation)
 class AccommodationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'user', 'country_code', 'bedroom_count', 'review_score', 'published')
+    list_display = ('id', 'title', 'user', 'country_code',
+                    'bedroom_count', 'review_score', 'published')
     search_fields = ('title', 'country_code')
     list_filter = ('published',)
     inlines = [AccommodationImageInline]
@@ -63,7 +80,7 @@ class AccommodationAdmin(admin.ModelAdmin):
 
     def get_fields(self, request, obj=None):
         fields = super().get_fields(request, obj)
-        
+
         # If the user is not a superuser, hide the 'user' field from the form
         if not request.user.is_superuser:
             fields = [field for field in fields if field != 'user']
@@ -74,7 +91,8 @@ class AccommodationAdmin(admin.ModelAdmin):
         Ensure that the 'user' field is read-only for staff and normal users, but editable for superusers.
         """
         if db_field.name == "user" and not request.user.is_superuser:
-            kwargs['disabled'] = True  # Disable the 'user' field for staff and normal users
+            # Disable the 'user' field for staff and normal users
+            kwargs['disabled'] = True
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def has_change_permission(self, request, obj=None):
@@ -88,7 +106,7 @@ class AccommodationAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return True
         if obj is None or obj.user == request.user:
-            return True
+            return False
         return False
 
 
@@ -114,7 +132,7 @@ class AccommodationImageAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return True
         if obj is None or obj.accommodation.user == request.user:
-            return True
+            return False
         return False
 
 
@@ -140,5 +158,5 @@ class LocalizeAccommodationAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return True
         if obj is None or obj.property.user == request.user:
-            return True
+            return False
         return False
