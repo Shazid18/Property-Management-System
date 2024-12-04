@@ -8,7 +8,7 @@ from django.http import HttpResponse
 
 
 def home(request):
-    return HttpResponse("Hello, World!")
+     return render(request, 'base_generic.html', {})
 
 
 def property_owner_sign_up(request):

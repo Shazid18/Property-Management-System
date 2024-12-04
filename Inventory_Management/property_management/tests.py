@@ -134,7 +134,7 @@ class LocalizeAccommodationModelTest(TestCase):
             property=self.accommodation,
             language="en",
             description="A luxurious apartment in NYC",
-            policy={"check_in": "2 PM", "check_out": "11 AM"},
+            policy={"check_in": "2 PM", "check_out": "11 AMstyle="text-align: center"},
         )
 
     def test_localization_str(self):
@@ -158,7 +158,7 @@ class ViewsTestCase(TestCase):
         """
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Hello, World!")
+        self.assertTemplateUsed(response, 'base_generic.html')
 
     def test_property_owner_sign_up_get(self):
         """

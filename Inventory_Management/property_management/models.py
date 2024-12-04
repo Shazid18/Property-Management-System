@@ -66,7 +66,6 @@ class Accommodation(models.Model):
         super().save(*args, **kwargs)
 
 
-# models.py
 class AccommodationImage(models.Model):
     accommodation = models.ForeignKey(
         Accommodation,
