@@ -103,8 +103,8 @@ This project uses Docker and Docker Compose to run the application with all nece
 ### Installation Steps
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/Shazid18/Property-Management-System.git
+   cd Property-Management-System
    ```
 2. Set up a virtual environment:
    ```bash
