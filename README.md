@@ -126,6 +126,7 @@ This project uses Docker and Docker Compose to run the application with all nece
  
 1. Docker Set Up:
    ```bash
+   cd Inventory_Management
    docker-compose up --build -d
    ```
    
