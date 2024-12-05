@@ -149,9 +149,11 @@ This project uses Docker and Docker Compose to run the application with all nece
 
 ## Usage
 
-1. `http://localhost:8000`
+1. `http://localhost:8000` => Home page
 
-2. `http://localhost:8000/sign-up/` for Property Owner signup
+2. `http://localhost:8000/sign-up/` => for Property Owner signup
+
+3. `http://localhost:8000/sign-up/success/` => successful signup. If the admin permite the Active and Staff status of the user then the user can login into the admin pannel.
 
 3. Access the admin panel at `http://localhost:8000/admin/` and log in with your superuser credentials.
 
@@ -186,8 +188,6 @@ This project uses Docker and Docker Compose to run the application with all nece
      "Free Wi-Fi",
      "Air Conditioning",
      "Swimming Pool",
-     "Pet-Friendly",
-     "Room Service",
      "Gym Access"
     ]
     ```
