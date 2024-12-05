@@ -27,6 +27,9 @@ A Django-based property management system with PostgreSQL and PostGIS integratio
 
 6. **Sitemap Generation**:
    - Automaticlly generate a sitemap.json file for all country locations alphabetically by location name.
+
+7. **Partition**
+   - Partition the database for optimize the application
  
 
 ## Project Structure
@@ -175,6 +178,38 @@ This project uses Docker and Docker Compose to run the application with all nece
    ```bash
    docker exec -it django_app python manage.py create_property_owners_group
    ```
+
+## Add accommodation Amenities field
+
+    ```
+    [
+     "Free Wi-Fi",
+     "Air Conditioning",
+     "Swimming Pool",
+     "Pet-Friendly",
+     "Room Service",
+     "Gym Access"
+    ]
+    ```
+
+## Add Localized Accommodation Aolicy field
+
+- language: en
+
+    ``` 
+    {
+    "pet_policy" : "Pets are not allowed.",
+    "smoking_policy" : "Smoking is prohibited indoors."
+    }
+    ```
+- language: Len
+
+    ``` 
+    {
+    "pet_policy" : "No se permiten mascotas.",
+    "smoking_policy" : "Está prohibido fumar en el interior."
+    }
+    ```
 
 ## CSV Format for Locations
 
