@@ -211,3 +211,12 @@ INSTALLED_APPS = [
     ...
 ]
 ```
+
+
+## Connect Database ##
+
+docker exec -it inventory_postgis bash
+
+psql -U postgres inventory_db
+
+\dt
